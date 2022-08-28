@@ -13,3 +13,4 @@ Depois disso basta partir para o uso!
 
 ## Uso
 O uso é bastante simples, basta digitar: `dicio-cli [PALAVRA]`, onde [PALAVRA] é a palavra que você quer pesquisar.
+![image](https://user-images.githubusercontent.com/37634205/187089622-6e827d9c-dd13-46c3-908f-0bce9a085868.png)
