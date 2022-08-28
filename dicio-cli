@@ -9,7 +9,7 @@ current_definition=0
 
 get_word_definition() {
   DOM_WORD_DEFINITION='<p itemprop="description" class="significado textonovo">'
-  WORD_DEFINITION=$(curl "https://www.dicio.com.br/${WORD_TO_SEARCH}/" | grep "${DOM_WORD_DEFINITION}")
+  WORD_DEFINITION=$(curl -s "https://www.dicio.com.br/${WORD_TO_SEARCH}/" | grep "${DOM_WORD_DEFINITION}")
 }
 
 remove_paragraph() {
