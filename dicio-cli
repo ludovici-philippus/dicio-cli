@@ -3,9 +3,14 @@
 
 WORD=$(echo $1 | tr '[:lower:]' '[:upper:]')
 WORD_TO_SEARCH=$(echo $1 | tr '[:upper:]' '[:lower:]')
+
 declare -A COLORS
 COLORS=([YELLOW]='\033[1;33m' [MAGENTA]='\033[1;35m' [BLUE]='\033[0;36m' [WHITE]='\033[1;37m' [GRAY]='\033[0;37m')
 current_definition=0
+
+get_accented_word() {
+  ACCENTED_WORD=$(curl -s "https://www.dicio.com.br/${WORD_TO_SEARCH}/" | grep '<h2 class="tit-significado">' | awk -F'[>]' '{ print $2 }' | awk -F'[</h2>]' '{ print $1 }')
+}
 
 get_word_definition() {
   DOM_WORD_DEFINITION='<p itemprop="description" class="significado textonovo">'
@@ -33,12 +38,13 @@ print_definitions() {
   DEFINITION=$(echo ${DEFINITIONS} | awk -v current_definition="$current_definition" -F'[|]' '{ print $current_definition }')
 }
 
+get_accented_word
 get_word_definition
 format_word_definition
 
 clear
 echo -e "${COLORS[BLUE]}${WORD}${COLORS[WHITE]}"
-echo "Significado de ${WORD}"
+echo $ACCENTED_WORD 
 echo "-----------------------------------------"
 while :
 do
